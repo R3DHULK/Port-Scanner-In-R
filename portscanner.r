@@ -1,6 +1,6 @@
 # prompt the user for the host and range of ports to scan
-host <- readline("Enter the host to scan: ")
-port_range <- readline("Enter the range of ports to scan (e.g. '1-1024'): ")
+host <- readline(" [*] Enter the host to scan: ")
+port_range <- readline(" [*] Enter the range of ports to scan (e.g. '1-1024'): ")
 
 # parse the port range input
 port_range <- as.integer(strsplit(port_range, "-")[[1]])
@@ -18,10 +18,12 @@ check_port <- function(port) {
 }
 
 # scan the ports and print the results
-cat("Scanning ports on", host, "...\n")
+cat(" [*] Scanning ports on", host, "...\n")
 for(port in port_range) {
   if(check_port(port)) {
-    cat("Port", port, "is open.\n")
+    cat(" [+] Port", port, "is open.\n")
+  } else {
+    cat(" [-] Port", port, "is closed.\n")
   }
 }
-cat("Scan complete.\n")
+cat(" [*] Scan complete.\n")
